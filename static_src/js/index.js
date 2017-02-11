@@ -18,14 +18,18 @@ function initial($comment) {
 	}
 	$comment.each(function () {
 		const $block = $(this);
-		let comment;
+		if (!$block.data('ms.comment')) {
+			let comment;
 
-		comment = new MSWidgets({
-			$block: $block,
-			service: $block.data('arg-service'),
-			name: $block.data('arg-name'),
-			id: $block.data('arg-id')
-		});
-		console.log(comment);
+			comment = new MSWidgets({
+				$block: $block,
+				service: $block.data('arg-service'),
+				name: $block.data('arg-name'),
+				id: $block.data('arg-id')
+			});
+
+			$block.data('ms.comment', comment);
+			comment.addContant();
+		}
 	});
 }
